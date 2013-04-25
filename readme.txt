@@ -23,6 +23,10 @@ If you'd like to contribute to the plugin you can find it on GitHub: [https://gi
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. That's it :)
 
+== Screenshots ==
+1. Frontend
+2. Extra Charges Field
+
 == Changelog ==
 
 = 0.1 - 25/04/2013 =
