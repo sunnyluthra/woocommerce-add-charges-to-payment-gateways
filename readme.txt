@@ -17,6 +17,9 @@ WooCommerce > Settings > Payment Gateways > single gateway page lets you set up 
 
 If you'd like to contribute to the plugin you can find it on GitHub: [https://github.com/sunnyluthra/woocommerce-add-charges-to-payment-gateways](https://github.com/sunnyluthra/woocommerce-add-charges-to-payment-gateways)
 
+For Support Please Visit
+[http://www.mrova.com/?p=1252]http://www.mrova.com/?p=1252
+
 == Installation ==
 
 1. Unzip into your `/wp-content/plugins/` directory.
