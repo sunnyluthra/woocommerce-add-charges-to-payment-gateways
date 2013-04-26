@@ -22,7 +22,7 @@ For Support Please Visit
 
 == Installation ==
 
-1. Unzip into your `/wp-content/plugins/` directory.
+1. Unzip into your /wp-content/plugins/ directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. That's it :)
 
