@@ -1,4 +1,4 @@
-=== WooCommerce Add Extra Charges Option To Payment Gateways ===
+=== WooCommerce Add Extra Fee Option To Payment Gateways ===
 Contributors: mRova
 Tags: woocommerce, payment gateway
 Requires at least: 3.5
@@ -7,11 +7,11 @@ Stable tag: 0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Add an option to your WooCommerce payment gateways to add extra charges.
+Add an option to your WooCommerce payment gateways to add extra fee.
 
 == Description ==
 
-This simple extension allows you to add a extra charges to the payment gateways.
+This simple extension allows you to add an extra charges to the payment gateways.
 
 WooCommerce > Settings > Payment Gateways > single gateway page lets you set up an extra charge, which will be added to total whenever user select that particular payment gateway.
 
