@@ -3,7 +3,7 @@ Contributors: mRova
 Tags: woocommerce, payment gateway
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 0.1
+Stable tag: 0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -34,3 +34,5 @@ For Support Please Visit
 
 = 0.1 - 25/04/2013 =
 * Initial release!
+= 0.2 - 26/04/2013 =
+* Just for the sake of update!
