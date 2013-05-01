@@ -3,8 +3,8 @@ Contributors: mRova
 Tags: woocommerce, payment gateway
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 0.3
-Version: 0.3
+Stable tag: 0.4
+Version: 0.4
 
 == Description ==
 
@@ -40,3 +40,5 @@ For Support Please Visit
 * Initial release!
 = 0.2 - 26/04/2013 =
 * Just for the sake of update!
+= 0.4 - 01/05/2013 =
+* compatibility with older version of WooCommerce!
