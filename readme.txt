@@ -41,4 +41,4 @@ For Support Please Visit
 = 0.2 - 26/04/2013 =
 * Just for the sake of update!
 = 0.4 - 01/05/2013 =
-* compatibility with older version of WooCommerce!
+* added % functionality!
