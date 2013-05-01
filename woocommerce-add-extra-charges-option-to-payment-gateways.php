@@ -29,6 +29,9 @@ Author URI: http://www.mrova.com
  * GNU General Public License for more details.
  * **********************************************************************
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+
 class WC_PaymentGateway_Add_Charges{
     public function __construct(){
         $this -> current_gateway_title = '';
