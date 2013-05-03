@@ -3,8 +3,8 @@ Contributors: mRova
 Tags: woocommerce, payment gateway
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 0.5
-Version: 0.5
+Stable tag: 0.6
+Version: 0.6
 
 == Description ==
 
@@ -44,3 +44,5 @@ For Support Please Visit
 * added % functionality!
 = 0.5 - 01/05/2013 =
 * Removed Bug in % formula :(!
+= 0.5 - 01/05/2013 =
+* Removed Bug in removing extra charges!
