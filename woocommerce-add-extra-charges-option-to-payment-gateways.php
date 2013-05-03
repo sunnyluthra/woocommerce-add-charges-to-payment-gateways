@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Add Charges To Payment Gateway
 Plugin URI: http://www.mrova.com
 Description: You can add extra fee for any payment gateways
-Version: 0.6
+Version: 0.7
 Author: Sunny Luthra
 Author URI: http://www.mrova.com
 */
@@ -53,7 +53,7 @@ class WC_PaymentGateway_Add_Charges{
                     $current_gateway = $gateway -> id;
                     $extra_charges_id = 'woocommerce_'.$current_gateway.'_extra_charges';
                     $extra_charges_type = $extra_charges_id.'_type';
-                    if($_REQUEST['save']){
+                    if(isset($_REQUEST['save'])){
                         update_option( $extra_charges_id, $_REQUEST[$extra_charges_id] );
                         update_option( $extra_charges_type, $_REQUEST[$extra_charges_type] );
                     }
