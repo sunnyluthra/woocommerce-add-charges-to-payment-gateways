@@ -106,7 +106,7 @@ class WC_PaymentGateway_Add_Charges{
             $current_gateway_id = $current_gateway -> id;
             $extra_charges_id = 'woocommerce_'.$current_gateway_id.'_extra_charges';
             $extra_charges_type = $extra_charges_id.'_type';
-            $extra_charges = (int)get_option( $extra_charges_id);
+            $extra_charges = (float)get_option( $extra_charges_id);
             $extra_charges_type_value = get_option( $extra_charges_type); 
             if($extra_charges){
                 if($extra_charges_type_value=="percentage"){
