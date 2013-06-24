@@ -3,8 +3,8 @@ Contributors: mRova
 Tags: woocommerce, payment gateway
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 0.7
-Version: 0.7
+Stable tag: 0.8
+Version: 0.8
 
 == Description ==
 
@@ -48,3 +48,6 @@ For Support Please Visit
 * Removed Bug in removing extra charges!
 = 0.7 - 03/05/2013 =
 * Removed unidentified index error bug!
+= 0.8 - 24/06/2013 =
+* Change in trigger function.
+* Can accept float values for extra charges.

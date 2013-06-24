@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Add Charges To Payment Gateway
 Plugin URI: http://www.mrova.com
 Description: You can add extra fee for any payment gateways
-Version: 0.7
+Version: 0.8
 Author: Sunny Luthra
 Author URI: http://www.mrova.com
 */
@@ -38,7 +38,7 @@ class WC_PaymentGateway_Add_Charges{
         $this -> current_gateway_extra_charges = '';
         add_action('admin_head', array($this, 'add_form_fields'));
         add_action( 'woocommerce_calculate_totals', array( $this, 'calculate_totals' ), 10, 1 );
-        add_action('wp_footer', array($this, 'update_checkout'));
+        wp_enqueue_script( 'wc-add-extra-charges', $this->plugin_url() . '/assets/app.js', array('wc-checkout'), false, true );
     }
 
     function add_form_fields(){
@@ -82,73 +82,84 @@ class WC_PaymentGateway_Add_Charges{
                 $('.form-table:last').after($data);
 
             });
-            </script>
-            <?php
-        }
-    }
+</script>
+<?php
+}
+}
 
-    public function calculate_totals( $totals ) {
-        global $woocommerce;
-        $available_gateways = $woocommerce->payment_gateways->get_available_payment_gateways();
-        $current_gateway = '';
-        if ( ! empty( $available_gateways ) ) {
+public function calculate_totals( $totals ) {
+    global $woocommerce;
+    $available_gateways = $woocommerce->payment_gateways->get_available_payment_gateways();
+    $current_gateway = '';
+    if ( ! empty( $available_gateways ) ) {
            // Chosen Method
-            if ( isset( $woocommerce->session->chosen_payment_method ) && isset( $available_gateways[ $woocommerce->session->chosen_payment_method ] ) ) {
-                $current_gateway = $available_gateways[ $woocommerce->session->chosen_payment_method ];
-            } elseif ( isset( $available_gateways[ get_option( 'woocommerce_default_gateway' ) ] ) ) {
-                $current_gateway = $available_gateways[ get_option( 'woocommerce_default_gateway' ) ];
-            } else {
-                $current_gateway =  current( $available_gateways );
-
-            }
-        }
-        if($current_gateway!=''){
-            $current_gateway_id = $current_gateway -> id;
-            $extra_charges_id = 'woocommerce_'.$current_gateway_id.'_extra_charges';
-            $extra_charges_type = $extra_charges_id.'_type';
-            $extra_charges = (int)get_option( $extra_charges_id);
-            $extra_charges_type_value = get_option( $extra_charges_type); 
-            if($extra_charges){
-                if($extra_charges_type_value=="percentage"){
-                    $totals -> cart_contents_total = $totals -> cart_contents_total + round(($totals -> cart_contents_total*$extra_charges)/100);
-                }else{
-                    $totals -> cart_contents_total = $totals -> cart_contents_total + $extra_charges;
-                }
-                $this -> current_gateway_title = $current_gateway -> title;
-                $this -> current_gateway_extra_charges = $extra_charges;
-                $this -> current_gateway_extra_charges_type_value = $extra_charges_type_value;
-                add_action( 'woocommerce_review_order_before_order_total',  array( $this, 'add_payment_gateway_extra_charges_row'));
-
-            }
+        if ( isset( $woocommerce->session->chosen_payment_method ) && isset( $available_gateways[ $woocommerce->session->chosen_payment_method ] ) ) {
+            $current_gateway = $available_gateways[ $woocommerce->session->chosen_payment_method ];
+        } elseif ( isset( $available_gateways[ get_option( 'woocommerce_default_gateway' ) ] ) ) {
+            $current_gateway = $available_gateways[ get_option( 'woocommerce_default_gateway' ) ];
+        } else {
+            $current_gateway =  current( $available_gateways );
 
         }
-        return $totals;
+    }
+    if($current_gateway!=''){
+        $current_gateway_id = $current_gateway -> id;
+        $extra_charges_id = 'woocommerce_'.$current_gateway_id.'_extra_charges';
+        $extra_charges_type = $extra_charges_id.'_type';
+        $extra_charges = (float)get_option( $extra_charges_id);
+        $extra_charges_type_value = get_option( $extra_charges_type); 
+        if($extra_charges){
+            if($extra_charges_type_value=="percentage"){
+                $totals -> cart_contents_total = $totals -> cart_contents_total + round(($totals -> cart_contents_total*$extra_charges)/100);
+            }else{
+                $totals -> cart_contents_total = $totals -> cart_contents_total + $extra_charges;
+            }
+            $this -> current_gateway_title = $current_gateway -> title;
+            $this -> current_gateway_extra_charges = $extra_charges;
+            $this -> current_gateway_extra_charges_type_value = $extra_charges_type_value;
+            add_action( 'woocommerce_review_order_before_order_total',  array( $this, 'add_payment_gateway_extra_charges_row'));
+
+        }
+
+    }
+    return $totals;
+}
+
+function add_payment_gateway_extra_charges_row(){
+    ?>
+    <tr class="payment-extra-charge">
+        <th><?php echo $this->current_gateway_title?> Extra Charges</th>
+        <td><?php if($this->current_gateway_extra_charges_type_value=="percentage"){
+            echo $this -> current_gateway_extra_charges.'%';
+        }else{
+         echo woocommerce_price($this -> current_gateway_extra_charges);
+     }?></td>
+ </tr>
+ <?php
+}
+
+/**
+     * Get the plugin url.
+     *
+     * @access public
+     * @return string
+     */
+    public function plugin_url() {
+        if ( $this->plugin_url ) return $this->plugin_url;
+        return $this->plugin_url = untrailingslashit( plugins_url( '/', __FILE__ ) );
     }
 
-    function add_payment_gateway_extra_charges_row(){
-        ?>
-        <tr class="payment-extra-charge">
-            <th><?php echo $this->current_gateway_title?> Extra Charges</th>
-            <td><?php if($this->current_gateway_extra_charges_type_value=="percentage"){
-                    echo $this -> current_gateway_extra_charges.'%';
-                }else{
-                   echo woocommerce_price($this -> current_gateway_extra_charges);
-                }?></td>
-        </tr>
-        <?php
-    }
 
-    function update_checkout(){
-        ?>
-        <script>
-        jQuery(document).ready(function($){
-           $('.payment_methods input.input-radio').live('click', function(){
-            $('#billing_country, #shipping_country, .country_to_state').trigger('change');
+    /**
+     * Get the plugin path.
+     *
+     * @access public
+     * @return string
+     */
+    public function plugin_path() {
+        if ( $this->plugin_path ) return $this->plugin_path;
 
-           })
-        });
-        </script>
-        <?php
+        return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
     }
 
 }
