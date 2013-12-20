@@ -130,7 +130,7 @@ class WC_PaymentGateway_Add_Charges{
     function add_payment_gateway_extra_charges_row(){
         ?>
     <tr class="payment-extra-charge">
-        <th><?php echo $this->current_gateway_title . __( 'Extra Charges', 'wcpg_addcharges' ) ?></th>
+        <th><?php printf( __( '%s Extra Charges', 'wcpg_addcharges' ), $this->current_gateway_title ) ?></th>
         <td><?php if($this->current_gateway_extra_charges_type_value=="percentage"){
             echo $this -> current_gateway_extra_charges.'%';
         }else{

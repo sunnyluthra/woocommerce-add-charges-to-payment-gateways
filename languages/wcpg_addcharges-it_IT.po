@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Add Charges to Payment Gateways\n"
-"POT-Creation-Date: 2013-12-20 11:59+0100\n"
-"PO-Revision-Date: 2013-12-20 12:12+0100\n"
+"POT-Creation-Date: 2013-12-20 12:32+0100\n"
+"PO-Revision-Date: 2013-12-20 12:32+0100\n"
 "Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
 "Language-Team: Nicola Mustone <mustone.nicola@gmail.com>\n"
 "Language: it_IT\n"
@@ -21,7 +21,6 @@ msgid "Add Extra Charges"
 msgstr "Aggiungi Supplemento"
 
 #: woocommerce-add-extra-charges-option-to-payment-gateways.php:72
-#: woocommerce-add-extra-charges-option-to-payment-gateways.php:133
 msgid "Extra Charges"
 msgstr "Supplemento"
 
@@ -36,3 +35,8 @@ msgstr "Aggiungi al totale"
 #: woocommerce-add-extra-charges-option-to-payment-gateways.php:82
 msgid "Total % Add"
 msgstr "Aggiungi % al totale"
+
+#: woocommerce-add-extra-charges-option-to-payment-gateways.php:133
+#, php-format
+msgid "%s Extra Charges"
+msgstr "Supplemento %s"
