@@ -46,10 +46,10 @@ class WC_PaymentGateway_Add_Charges{
          // Get current tab/section
         $current_tab        = ( empty( $_GET['tab'] ) ) ? '' : sanitize_text_field( urldecode( $_GET['tab'] ) );
         $current_section    = ( empty( $_REQUEST['section'] ) ) ? '' : sanitize_text_field( urldecode( $_REQUEST['section'] ) );
-        if($current_tab == 'payment_gateways' && $current_section!=''){
+        if($current_tab == 'checkout' && $current_section!=''){
             $gateways = $woocommerce->payment_gateways->payment_gateways();
             foreach($gateways as $gateway){
-                if(get_class($gateway)==$current_section){
+                if(strtolower(get_class($gateway))==$current_section){
                     $current_gateway = $gateway -> id;
                     $extra_charges_id = 'woocommerce_'.$current_gateway.'_extra_charges';
                     $extra_charges_type = $extra_charges_id.'_type';
@@ -110,7 +110,7 @@ public function calculate_totals( $totals ) {
         $extra_charges_type_value = get_option( $extra_charges_type); 
         if($extra_charges){
             if($extra_charges_type_value=="percentage"){
-                $totals -> cart_contents_total = $totals -> cart_contents_total + round(($totals -> cart_contents_total*$extra_charges)/100);
+                $totals -> cart_contents_total = $totals -> cart_contents_total + ($totals -> cart_contents_total*$extra_charges)/100;
             }else{
                 $totals -> cart_contents_total = $totals -> cart_contents_total + $extra_charges;
             }
